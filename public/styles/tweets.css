@@ -2,11 +2,11 @@ section {
   flex-direction: column;
 }
 
-div hr {
-  width: 1000px;
+article hr {
   overflow: visible;
   color: black;
-  height: -webkit-fill-available;
+
+  border-bottom: 8px solid;
 }
 /* h2 {
   display: flex;

@@ -21,11 +21,10 @@ section {
   border-bottom: black;
   font-weight: bold;
 }
-div hr {
-  width: 1000px;
+form hr {
   overflow: visible;
   color: black;
-  height: -webkit-fill-available;
+  border-bottom: 8px solid;
 }
 h2 {
   display: flex;
