@@ -4,6 +4,8 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+//const { text } = require("body-parser");
+
 const data = [
   {
     user: {
@@ -39,8 +41,17 @@ const renderTweets = function (tweets) {
   }
   // takes return value and appends it to the tweets container
 };
+//escape function
+const escapeString = function (str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  console.log(div.innerHTML);
+  return div.innerHTML;
+};
+
 //function to create tweet
 const createTweetElement = function (tweetData) {
+  //let $content = $("h2").text(tweetData.content.text)
   let $tweet = $(`<br/><br/><article class="article">
   <header class="tweet-header">
   <div class="iconName">
@@ -49,7 +60,7 @@ const createTweetElement = function (tweetData) {
   </div>
   <p id="tweetid">${tweetData.user.handle}</p>
   </header>
-  <p class="tweet-txt">${tweetData.content.text}</p>
+  <p class="tweet-txt">${escapeString(tweetData.content.text)}</p>
   <br/>
   <hr>
   <footer class="footer">
@@ -90,6 +101,7 @@ $(document).ready(() => {
   const form = $('form')
   //add an event listener to the form
   form.on("submit", (event)=> {
+   // $("textarea").val()=text($("textarea").val())
     if($("textarea").val().length <= 0){
       alert("No content found!");
     }
