@@ -5,6 +5,7 @@ header {
   justify-content: center;
 
   flex-direction: column;
+  padding: 5px;
   height: 400px;
   align-items: center;
 

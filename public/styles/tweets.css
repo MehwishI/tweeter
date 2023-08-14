@@ -26,9 +26,14 @@ article {
   height: 150px;
   padding: 25px;
 }
+
 .iconName {
   display: flex;
   flex-direction: row;
+}
+.iconName img {
+  width: 100px;
+  height: 100px;
 }
 #tweetid {
   opacity: 0.5;
