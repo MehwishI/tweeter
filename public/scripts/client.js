@@ -4,8 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-//const { text } = require("body-parser");
-
 const data = [
   {
     user: {
@@ -54,7 +52,6 @@ const escapeString = function (str) {
 
 //function to create tweet
 const createTweetElement = function (tweetData) {
-  //let $content = $("h2").text(tweetData.content.text)
   let $tweet = $(`<br/><br/><article class="article">
   <header class="tweet-header">
   <div class="iconName">
@@ -78,8 +75,6 @@ const createTweetElement = function (tweetData) {
 
   return $tweet;
 };
-//function to load tweets
-//Fetch tweets from the server
 
 // Test / driver code (temporary)
 //console.log($tweet); // to see what it looks like
@@ -97,14 +92,14 @@ $(document).ready(() => {
   };
   loadtweets();
 
-  //form on submit event handler
-
+  //code for form on-submit event handler
   const form = $("form");
   //add an event listener to the form
   form.on("submit", (event) => {
     $("#error-message").empty();
     $("#error-message").hide();
 
+    //show error is length is less than 0
     if ($("textarea").val().length <= 0) {
       $("#error-message").show();
       $("#error-message").text("No content found! Please enter some text.");
@@ -115,24 +110,24 @@ $(document).ready(() => {
         "The number of characters has exceeded the limit!"
       );
       return false;
-      //alert("The number of characters has exceeded the limit!")
     } else {
       //prevent default behaviour
       event.preventDefault();
+
       //serialize data to sent to the server
-      //console.log($(this).data);
       var str = $(form).serialize();
       console.log(str);
 
       //sent post request to server
       $.post(`http://localhost:8080/tweets?q=${str}`, str);
 
+      //empty out the container
       $("#tweets-container").empty();
+      //clear the text area
       $("#tweet-text").val("");
 
+      //load tweets
       loadtweets();
     }
   });
-
-  /////
 });

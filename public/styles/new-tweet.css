@@ -47,6 +47,10 @@ h2 {
   background-color: #4056a1;
   color: white;
 }
+.bar-btn-counter {
+  display: flex;
+  justify-content: space-between;
+}
 
 .bar {
   padding: 10px;
