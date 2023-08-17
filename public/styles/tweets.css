@@ -16,6 +16,9 @@ article hr {
 article {
   border-style: solid;
   box-shadow: 15px 15px #888888;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  padding: 15px;
 }
 .article .tweet-header {
   display: flex;

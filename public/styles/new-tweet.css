@@ -13,15 +13,24 @@ section {
   justify-content: flex-end;
   font-family: "Bungee";
 }
+label {
+  font-weight: bold;
+}
 
 #tweet-text {
   width: 100%;
-  min-height: 150px;
+  min-height: 60px;
   border: none;
   font-size: 90%;
-  border-bottom: black;
+
   font-weight: bold;
   resize: none;
+}
+#tweet-text:focus {
+  border: none;
+}
+#tweet-text:active {
+  border: none;
 }
 form hr {
   overflow: visible;
@@ -37,4 +46,24 @@ h2 {
   font-family: "Bungee";
   background-color: #4056a1;
   color: white;
+}
+
+.bar {
+  padding: 10px;
+  margin: 10px;
+  color: #333;
+  background: #fafafa;
+  border: 1px solid #ccc;
+}
+.error {
+  color: #ba3939;
+  background: #ffe0e0;
+  border: 1px solid #a33a3a;
+}
+i.ico {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
 }

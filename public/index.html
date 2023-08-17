@@ -47,12 +47,15 @@
   <body class="body">
     <!-- Top nav bar (fixed) -->
     <nav class="nav">
-      <span >tweeter</span>
+      <span class="tweeter-app">tweeter</span>
       <span  style="float: right">Write a new tweet</span><br />
       <span class="nav-arrow"
         ><i class="fa-solid fa-angles-down" style="float: right"></i
       ></span>
     </nav>
+    <br>
+    <br>
+    <span></span>
     <header class="header">
       <div class= "image-padding">
         <img src="/images/profile-hex.png" />
@@ -65,11 +68,12 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
+       
         <br/>
         <form action="/tweets/" method="post">
            <label for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweet-text" ></textarea>
+          <div class="bar error" id="error-message"> <i class="ico">&#9747;</i>Error message</div>
           <br/>
           <hr>
           <div>

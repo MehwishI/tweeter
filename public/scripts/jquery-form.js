@@ -11,6 +11,5 @@
 //     $.POST('https://localhost:8080/tweets/',str)
 //    // .then()
 
-  
 //   })
 // });

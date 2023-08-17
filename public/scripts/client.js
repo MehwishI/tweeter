@@ -33,6 +33,9 @@ const data = [
 
 const renderTweets = function (tweets) {
   // loops through tweets
+  tweets.sort(function (a, b) {
+    return b.created_at - a.created_at;
+  });
 
   for (let tweetData of tweets) {
     // calls createTweetElement for each tweet
@@ -64,7 +67,7 @@ const createTweetElement = function (tweetData) {
   <br/>
   <hr>
   <footer class="footer">
-            <div>${timeago.format(Date.now() - (tweetData.created_at))}</div>
+            <div>${timeago.format(Date.now() - tweetData.created_at)}</div>
             <div>
               <i class="fa-solid fa-flag"></i>
               <i class="fa-solid fa-retweet"></i>
@@ -78,55 +81,58 @@ const createTweetElement = function (tweetData) {
 //function to load tweets
 //Fetch tweets from the server
 
-
 // Test / driver code (temporary)
 //console.log($tweet); // to see what it looks like
 //$("#tweets-container").append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc
 $(document).ready(() => {
-  
- //load existing tweets
- const loadtweets = function() {
-  $.get('http://localhost:8080/tweets')
-  .then((data) => {
-    console.log(data)
-    renderTweets(data);
+  $("#error-message").empty();
+  $("#error-message").hide();
 
-  })
-
-}
+  //load existing tweets
+  const loadtweets = function () {
+    $.get("http://localhost:8080/tweets").then((data) => {
+      console.log(data);
+      renderTweets(data);
+    });
+  };
   loadtweets();
 
   //form on submit event handler
 
-  const form = $('form')
+  const form = $("form");
   //add an event listener to the form
-  form.on("submit", (event)=> {
-   // $("textarea").val()=text($("textarea").val())
-    if($("textarea").val().length <= 0){
-      alert("No content found!");
-    }
-    else if($("textarea").val().length > 140) {
-      alert("The number of characters has exceeded the limit!")
-    }
-    else {
-    //prevent default behaviour
-    event.preventDefault();
-    //serialize data to sent to the server
-    //console.log($(this).data);
-    var str = $(form).serialize();
-    console.log(str);
-   
-    //sent post request to server
-    $.post(`http://localhost:8080/tweets?q=${str}`,str)
+  form.on("submit", (event) => {
+    $("#error-message").empty();
+    $("#error-message").hide();
 
-    $("#tweets-container").empty();
+    if ($("textarea").val().length <= 0) {
+      $("#error-message").show();
+      $("#error-message").text("No content found! Please enter some text.");
+      return false;
+    } else if ($("textarea").val().length > 140) {
+      $("#error-message").show();
+      $("#error-message").text(
+        "The number of characters has exceeded the limit!"
+      );
+      return false;
+      //alert("The number of characters has exceeded the limit!")
+    } else {
+      //prevent default behaviour
+      event.preventDefault();
+      //serialize data to sent to the server
+      //console.log($(this).data);
+      var str = $(form).serialize();
+      console.log(str);
 
-    loadtweets();
+      //sent post request to server
+      $.post(`http://localhost:8080/tweets?q=${str}`, str);
 
+      $("#tweets-container").empty();
+      $("#tweet-text").val("");
+
+      loadtweets();
     }
   });
-   
+
   /////
-
-
 });
