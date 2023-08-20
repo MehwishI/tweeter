@@ -30,7 +30,7 @@ const data = [
 ];
 
 const renderTweets = function (tweets) {
-  // loops through tweets
+  // loops through tweets and sort by created at date in descending order
   tweets.sort(function (a, b) {
     return b.created_at - a.created_at;
   });
@@ -38,9 +38,9 @@ const renderTweets = function (tweets) {
   for (let tweetData of tweets) {
     // calls createTweetElement for each tweet
     const $tweet = createTweetElement(tweetData);
+    // takes return value and appends it to the tweets container
     $("#tweets-container").append($tweet);
   }
-  // takes return value and appends it to the tweets container
 };
 //escape function
 const escapeString = function (str) {
@@ -50,7 +50,7 @@ const escapeString = function (str) {
   return div.innerHTML;
 };
 
-//function to create tweet
+//function to create tweet element
 const createTweetElement = function (tweetData) {
   let $tweet = $(`<br/><br/><article class="article">
   <header class="tweet-header">
@@ -76,20 +76,19 @@ const createTweetElement = function (tweetData) {
   return $tweet;
 };
 
-// Test / driver code (temporary)
-//console.log($tweet); // to see what it looks like
-//$("#tweets-container").append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc
 $(document).ready(() => {
+  //empty error message element
   $("#error-message").empty();
+  //hide error message element
   $("#error-message").hide();
 
   //load existing tweets
   const loadtweets = function () {
     $.get("http://localhost:8080/tweets").then((data) => {
-      console.log(data);
       renderTweets(data);
     });
   };
+  //load tweets
   loadtweets();
 
   //code for form on-submit event handler
@@ -103,12 +102,16 @@ $(document).ready(() => {
     if ($("textarea").val().length <= 0) {
       $("#error-message").show();
       $("#error-message").text("No content found! Please enter some text.");
+      //returning false so that it doesn't proceed to post
       return false;
+
+      //if length is greater than 140 then show error text
     } else if ($("textarea").val().length > 140) {
       $("#error-message").show();
       $("#error-message").text(
         "The number of characters has exceeded the limit!"
       );
+      //returning false so that it doesn't proceed to post
       return false;
     } else {
       //prevent default behaviour
@@ -116,9 +119,8 @@ $(document).ready(() => {
 
       //serialize data to sent to the server
       var str = $(form).serialize();
-      console.log(str);
 
-      //sent post request to server
+      //sent post request to server with the data (str)
       $.post(`http://localhost:8080/tweets?q=${str}`, str);
 
       //empty out the container
@@ -126,7 +128,7 @@ $(document).ready(() => {
       //clear the text area
       $("#tweet-text").val("");
 
-      //load tweets
+      //load tweets again to show all the tweets along with the newly added tweet
       loadtweets();
     }
   });
