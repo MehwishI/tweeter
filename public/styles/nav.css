@@ -6,16 +6,26 @@ nav {
   color: #ffffff;
   padding: 1.5em;
   position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
 }
 span.tweeter-app {
   margin: 10px;
 }
 span.nav-arrow {
   color: red;
-  float: right;
-  margin-right: 10%;
+
   padding-top: 10px;
 }
-span.nav-align {
-  display: block;
+.nav-align {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn {
+  float: right;
+  border: none;
+  background: none;
+  color: white;
 }
