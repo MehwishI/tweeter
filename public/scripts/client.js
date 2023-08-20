@@ -4,31 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const data = [
-  {
-    user: {
-      name: "Newton",
-      avatars: "https://i.imgur.com/73hZDYK.png",
-      handle: "@SirIsaac",
-    },
-    content: {
-      text: "If I have seen further it is by standing on the shoulders of giants",
-    },
-    created_at: 1461116232227,
-  },
-  {
-    user: {
-      name: "Descartes",
-      avatars: "https://i.imgur.com/nlhLi3I.png",
-      handle: "@rd",
-    },
-    content: {
-      text: "Je pense , donc je suis",
-    },
-    created_at: 1461113959088,
-  },
-];
-
 const renderTweets = function (tweets) {
   // loops through tweets and sort by created at date in descending order
   tweets.sort(function (a, b) {
@@ -64,7 +39,7 @@ const createTweetElement = function (tweetData) {
   <br/>
   <hr>
   <footer class="footer">
-            <div>${timeago.format(Date.now() - tweetData.created_at)}</div>
+            <div>${timeago.format(tweetData.created_at)}</div>
             <div>
               <i class="fa-solid fa-flag"></i>
               <i class="fa-solid fa-retweet"></i>
@@ -76,6 +51,14 @@ const createTweetElement = function (tweetData) {
   return $tweet;
 };
 
+//function to slide up and down tweets
+const slideButton = function () {
+  $("#sec-new-tweet").slideToggle("slow", "linear");
+  if ($("#sec-new-tweet").visibility === true) {
+    $("textarea").active = true;
+  }
+};
+
 $(document).ready(() => {
   //empty error message element
   $("#error-message").empty();
@@ -84,12 +67,34 @@ $(document).ready(() => {
 
   //load existing tweets
   const loadtweets = function () {
-    $.get("http://localhost:8080/tweets").then((data) => {
+    $.get("/tweets").then((data) => {
       renderTweets(data);
     });
   };
-  //load tweets
+
   loadtweets();
+  //when window is scrolled, scroll button is display block
+  // window.onscroll = function () {
+  $(document).on("scroll", (event) => {
+    if ($(this).scrollTop() > 100) {
+      $("#scrollbtnId").css("display", "block");
+    } else {
+      $("#scrollbtnId").css("display", "none");
+    }
+  });
+
+  $("#scrollbtnId").on("click", (event) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    // $(document).scrollTop(0);
+  });
+
+  const newTweetBtn = $("#writeTweet");
+  newTweetBtn.on("click", (event) => {
+    slideButton();
+  });
 
   //code for form on-submit event handler
   const form = $("form");
@@ -98,7 +103,7 @@ $(document).ready(() => {
     $("#error-message").empty();
     $("#error-message").hide();
 
-    //show error is length is less than 0
+    //show error if length is less than 0
     if ($("textarea").val().length <= 0) {
       $("#error-message").show();
       $("#error-message").text("No content found! Please enter some text.");
@@ -121,15 +126,15 @@ $(document).ready(() => {
       var str = $(form).serialize();
 
       //sent post request to server with the data (str)
-      $.post(`http://localhost:8080/tweets?q=${str}`, str);
+      $.post(`/tweets?q=${str}`, str).then(() => {
+        //empty out the container
+        $("#tweets-container").empty();
+        //clear the text area
+        $("#tweet-text").val("");
 
-      //empty out the container
-      $("#tweets-container").empty();
-      //clear the text area
-      $("#tweet-text").val("");
-
-      //load tweets again to show all the tweets along with the newly added tweet
-      loadtweets();
+        //load tweets again to show all the tweets along with the newly added tweet
+        loadtweets();
+      });
     }
   });
 });
