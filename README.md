@@ -23,8 +23,17 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## Screenshots
 
-!["Screenshot of desktop laptop layout"] (https://github.com/MehwishI/tweeter/blob/master/docs/desktop-laptop-layout.png)
-!["Screenshot of add a tweet"](https://github.com/MehwishI/tweeter/blob/master/docs/add-tweet.png)
-!["Screenshot of tweet added"](https://github.com/MehwishI/tweeter/blob/master/docs/tweet-added.png)
-!["Screenshot of tweets"] (https://github.com/MehwishI/tweeter/blob/master/docs/tweets.png)
-!["Screenshot of tablet or phone layout"](https://github.com/MehwishI/tweeter/blob/master/docs/tablet-phone-layout.png)
+-Desktop or Laptop layout
+!["Screenshot of desktop laptop layout"](https://github.com/MehwishI/tweeter/blob/master/docs/desktop-laptop-layout.png)
+
+- Add a new tweet
+  !["Screenshot of add a tweet"](https://github.com/MehwishI/tweeter/blob/master/docs/add-tweet.png)
+
+- Display the new tweet
+  !["Screenshot of tweet added"](https://github.com/MehwishI/tweeter/blob/master/docs/tweet-added.png)
+
+-Display all the tweets
+!["Screenshot of tweets"](https://github.com/MehwishI/tweeter/blob/master/docs/tweets.png)
+
+- Tablet or phone layout
+  !["Screenshot of tablet or phone layout"](https://github.com/MehwishI/tweeter/blob/master/docs/tablet-phone-layout.png)
