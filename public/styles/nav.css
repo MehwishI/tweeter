@@ -16,3 +16,6 @@ span.nav-arrow {
   margin-right: 10%;
   padding-top: 10px;
 }
+span.nav-align {
+  display: block;
+}
