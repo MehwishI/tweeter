@@ -30,10 +30,10 @@ const createTweetElement = function (tweetData) {
   let $tweet = $(`<br/><br/><article class="article">
   <header class="tweet-header">
   <div class="iconName">
-   <img src='${tweetData.user.avatars}'></img>
+   <img src='${tweetData.user.avatars}' alt="user avatar"></img>
   <h2>${tweetData.user.name}</h2>
   </div>
-  <p id="tweetid">${tweetData.user.handle}</p>
+  <p class="tweetid">${tweetData.user.handle}</p>
   </header>
   <p class="tweet-txt">${escapeString(tweetData.content.text)}</p>
   <br/>

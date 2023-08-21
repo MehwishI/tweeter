@@ -40,7 +40,7 @@ article:hover {
   width: 100px;
   height: 100px;
 }
-#tweetid {
+.tweetid {
   opacity: 0.5;
 }
 footer {
