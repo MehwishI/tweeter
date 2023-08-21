@@ -15,13 +15,12 @@ span.tweeter-app {
 }
 span.nav-arrow {
   color: red;
-
   padding-top: 10px;
 }
 .nav-align {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 .btn {
   float: right;

@@ -73,8 +73,8 @@ $(document).ready(() => {
   };
 
   loadtweets();
-  //when window is scrolled, scroll button is display block
-  // window.onscroll = function () {
+
+  //when DOM is scrolled, scroll button is set display= block
   $(document).on("scroll", (event) => {
     if ($(this).scrollTop() > 100) {
       $("#scrollbtnId").css("display", "block");
@@ -83,12 +83,12 @@ $(document).ready(() => {
     }
   });
 
+  //scroll button click event handler
   $("#scrollbtnId").on("click", (event) => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-    // $(document).scrollTop(0);
   });
 
   const newTweetBtn = $("#writeTweet");
@@ -132,7 +132,8 @@ $(document).ready(() => {
         //clear the text area
         $("#tweet-text").val("");
 
-        //load tweets again to show all the tweets along with the newly added tweet
+        //load tweets again to show all the tweets
+        //along with the newly added tweet
         loadtweets();
       });
     }
